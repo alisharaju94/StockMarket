@@ -1,25 +1,34 @@
+/**
+ * 
+ */
 package com.stockMarket.model;
 
-import java.math.BigInteger;
+/**
+ * @author User
+ *
+ */
+public class CompanyResponseBean {
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
-@ApiModel
-public class Company {
-
-	@ApiModelProperty(notes = "The company name")
+	private String companyCode;
 	private String companyName;
-	@ApiModelProperty(notes = "Company CEO name")
 	private String companyCEO;
-	@ApiModelProperty(notes = "The company trun over. Minimum value should be 10 Cr.")
-	private BigInteger companyTurnOver;
-	@ApiModelProperty(notes = "Currency code. This should be a 3 letter code.eg: INR, USD, EUR etc..")
-	private String currencyCode;
-	@ApiModelProperty(notes = "The company url")
+	private String companyTurnOver;
 	private String companyUrl;
-	@ApiModelProperty(notes = "The stock exchange in which the company is listed in")
 	private String stockExchange;
+
+	/**
+	 * @return the comapnyCode
+	 */
+	public String getCompanyCode() {
+		return companyCode;
+	}
+
+	/**
+	 * @param comapnyCode the comapnyCode to set
+	 */
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
 
 	/**
 	 * @return the companyName
@@ -52,29 +61,15 @@ public class Company {
 	/**
 	 * @return the companyTurnOver
 	 */
-	public BigInteger getCompanyTurnOver() {
+	public String getCompanyTurnOver() {
 		return companyTurnOver;
 	}
 
 	/**
 	 * @param companyTurnOver the companyTurnOver to set
 	 */
-	public void setCompanyTurnOver(BigInteger companyTurnOver) {
+	public void setCompanyTurnOver(String companyTurnOver) {
 		this.companyTurnOver = companyTurnOver;
-	}
-
-	/**
-	 * @return the currencyCode
-	 */
-	public String getCurrencyCode() {
-		return currencyCode;
-	}
-
-	/**
-	 * @param currencyCode the currencyCode to set
-	 */
-	public void setCurrencyCode(String currencyCode) {
-		this.currencyCode = currencyCode;
 	}
 
 	/**
@@ -105,4 +100,5 @@ public class Company {
 		this.stockExchange = stockExchange;
 	}
 
+	
 }
