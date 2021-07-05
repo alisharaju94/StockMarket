@@ -38,7 +38,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 			throw new Exception();
 		}
 		marketResponse.setCompanyDetails(companyRes);
-		StockDetailsResponse stockDetailsResponse = stockServiceClient.addStock(stockMarketRequest.getStockDetails(), companyRes.getCompanyCode());
+		StockDetailsResponse stockDetailsResponse = stockServiceClient.addStock(stockMarketRequest.getStockDetails(), companyRes.getCode());
 		if(stockDetailsResponse == null) {
 			throw new Exception();
 		}

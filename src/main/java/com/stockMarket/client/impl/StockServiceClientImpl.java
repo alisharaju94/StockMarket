@@ -22,7 +22,7 @@ public class StockServiceClientImpl implements StockServiceClient {
 	private RestTemplate restTemplate;
 
 	@Override
-	public StockDetailsResponse addStock(StockDetails stockDetails, String companyCode) {
+	public StockDetailsResponse addStock(StockDetails stockDetails, long companyCode) {
 		UriTemplate uriTemplate = new UriTemplate(addStockUrl);
 		URI uri = uriTemplate.expand(companyCode);
 		StockDetailsResponse stockDetailsResponse = restTemplate

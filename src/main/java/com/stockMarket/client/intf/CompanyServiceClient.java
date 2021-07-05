@@ -5,5 +5,5 @@ import com.stockMarket.model.CompanyResponseBean;
 
 public interface CompanyServiceClient {
 
-	CompanyResponseBean addCompany(Company company);
+	CompanyResponseBean addCompany(Company company) throws Exception;
 }

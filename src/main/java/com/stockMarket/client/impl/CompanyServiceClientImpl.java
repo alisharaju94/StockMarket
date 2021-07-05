@@ -27,10 +27,13 @@ public class CompanyServiceClientImpl implements CompanyServiceClient {
 	private RestTemplate restTemplate;
 
 	@Override
-	public CompanyResponseBean addCompany(Company company) {
+	public CompanyResponseBean addCompany(Company company) throws Exception {
 
 		CompanyResponseBean responseBean = restTemplate.postForEntity(addCompanyUrl, company, CompanyResponseBean.class)
 				.getBody();
+		if(responseBean == null) {
+			throw new Exception();
+		}
 		return responseBean;
 	}
 }

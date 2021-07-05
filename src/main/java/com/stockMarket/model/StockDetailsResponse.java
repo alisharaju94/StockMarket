@@ -3,14 +3,16 @@
  */
 package com.stockMarket.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author User
  *
  */
-public class StockDetailsResponse {
+public class StockDetailsResponse implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private List<StockResponseBean> stockDetails;
 
 	/**
@@ -26,5 +28,5 @@ public class StockDetailsResponse {
 	public void setStockDetails(List<StockResponseBean> stockDetails) {
 		this.stockDetails = stockDetails;
 	}
-	
+
 }

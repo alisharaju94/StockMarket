@@ -3,87 +3,106 @@
  */
 package com.stockMarket.model;
 
+import java.io.Serializable;
+import java.math.BigInteger;
+
 /**
  * @author User
  *
  */
-public class CompanyResponseBean {
+public class CompanyResponseBean implements Serializable {
 
-	private String companyCode;
-	private String companyName;
-	private String companyCEO;
-	private String companyTurnOver;
-	private String companyUrl;
+	private static final long serialVersionUID = 1L;
+	private long code;
+	private String name;
+	private String ceo;
+	private BigInteger turnOver;
+	private String currencyCode;
+	private String url;
 	private String stockExchange;
 
 	/**
-	 * @return the comapnyCode
+	 * @return the code
 	 */
-	public String getCompanyCode() {
-		return companyCode;
+	public long getCode() {
+		return code;
 	}
 
 	/**
-	 * @param comapnyCode the comapnyCode to set
+	 * @param code the code to set
 	 */
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
+	public void setCode(long code) {
+		this.code = code;
 	}
 
 	/**
-	 * @return the companyName
+	 * @return the name
 	 */
-	public String getCompanyName() {
-		return companyName;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * @param companyName the companyName to set
+	 * @param name the name to set
 	 */
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * @return the companyCEO
+	 * @return the ceo
 	 */
-	public String getCompanyCEO() {
-		return companyCEO;
+	public String getCeo() {
+		return ceo;
 	}
 
 	/**
-	 * @param companyCEO the companyCEO to set
+	 * @param ceo the ceo to set
 	 */
-	public void setCompanyCEO(String companyCEO) {
-		this.companyCEO = companyCEO;
+	public void setCeo(String ceo) {
+		this.ceo = ceo;
 	}
 
 	/**
-	 * @return the companyTurnOver
+	 * @return the turnOver
 	 */
-	public String getCompanyTurnOver() {
-		return companyTurnOver;
+	public BigInteger getTurnOver() {
+		return turnOver;
 	}
 
 	/**
-	 * @param companyTurnOver the companyTurnOver to set
+	 * @param turnOver the turnOver to set
 	 */
-	public void setCompanyTurnOver(String companyTurnOver) {
-		this.companyTurnOver = companyTurnOver;
+	public void setTurnOver(BigInteger turnOver) {
+		this.turnOver = turnOver;
 	}
 
 	/**
-	 * @return the companyUrl
+	 * @return the currencyCode
 	 */
-	public String getCompanyUrl() {
-		return companyUrl;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
 	/**
-	 * @param companyUrl the companyUrl to set
+	 * @param currencyCode the currencyCode to set
 	 */
-	public void setCompanyUrl(String companyUrl) {
-		this.companyUrl = companyUrl;
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	/**
@@ -100,5 +119,4 @@ public class CompanyResponseBean {
 		this.stockExchange = stockExchange;
 	}
 
-	
 }

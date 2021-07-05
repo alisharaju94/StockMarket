@@ -1,5 +1,6 @@
 package com.stockMarket.config;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
@@ -21,15 +22,13 @@ public class SwaggerConfiguration {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.stockMarket.controller"))
-				.paths(PathSelectors.regex("/api/v1.0/market.*")).build().apiInfo(apiInfo());
+				.paths(PathSelectors.regex("/api/v1.0/market.*")).build().apiInfo(apiInfo())
+				.ignoredParameterTypes(Timestamp.class);
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfo("StockMarket API",
-				"API's for E-Stock Market application",
-				"0.0.1-SNAPSHOT", "Free to use",
-				new Contact("Alisha Raju", null, "Alisha.Raju@cognizant.com"),
-				null, null, Collections.emptyList());
+		return new ApiInfo("StockMarket API", "API's for E-Stock Market application", "0.0.1-SNAPSHOT", "Free to use",
+				new Contact("Alisha Raju", null, "Alisha.Raju@cognizant.com"), null, null, Collections.emptyList());
 
 	}
 }

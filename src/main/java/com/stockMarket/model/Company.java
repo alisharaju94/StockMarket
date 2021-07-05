@@ -1,108 +1,49 @@
 package com.stockMarket.model;
 
+import java.io.Serializable;
 import java.math.BigInteger;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
+import com.stockMarket.constants.CommonConstants;
+import com.stockMarket.constants.ValidationMessages;
+import com.stockMarket.validators.CurrCodeValidity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @ApiModel
-public class Company {
+@Data
+public class Company implements Serializable {
 
-	@ApiModelProperty(notes = "The company name")
+	private static final long serialVersionUID = 1L;
+
+	@ApiModelProperty(notes = "The company unique code. Required only for data manipulation ops", example = "1", allowEmptyValue = true)
+	private String companyCode;
+
+	@NotEmpty(message = ValidationMessages.COMPANY_NAME)
+	@ApiModelProperty(notes = "The company name", example = "XYZ")
 	private String companyName;
-	@ApiModelProperty(notes = "Company CEO name")
+
+	@NotEmpty(message = ValidationMessages.COMPANY_CEO)
+	@ApiModelProperty(notes = "Company CEO name", example = "Marc Alderson")
 	private String companyCEO;
-	@ApiModelProperty(notes = "The company trun over. Minimum value should be 10 Cr.")
+
+	@Min(value = CommonConstants.TEN_CR, message = ValidationMessages.COMPANY_TURN_OVER)
+	@ApiModelProperty(notes = "The company trun over. Minimum value should be 10 Cr.", example = "100000000")
 	private BigInteger companyTurnOver;
-	@ApiModelProperty(notes = "Currency code. This should be a 3 letter code.eg: INR, USD, EUR etc..")
+
+	@CurrCodeValidity
+	@ApiModelProperty(notes = "Currency code. This should be a 3 letter code.", example = "INR")
 	private String currencyCode;
-	@ApiModelProperty(notes = "The company url")
+
+	@NotEmpty(message = ValidationMessages.COMPANY_URL)
+	@ApiModelProperty(notes = "The company url", example = "www.xyz.com")
 	private String companyUrl;
-	@ApiModelProperty(notes = "The stock exchange in which the company is listed in")
+
+	@NotEmpty(message = ValidationMessages.COMPANY_STOCK_EXCHANGE)
+	@ApiModelProperty(notes = "The stock exchange in which the company is listed in", example = "NSE")
 	private String stockExchange;
-
-	/**
-	 * @return the companyName
-	 */
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	/**
-	 * @param companyName the companyName to set
-	 */
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	/**
-	 * @return the companyCEO
-	 */
-	public String getCompanyCEO() {
-		return companyCEO;
-	}
-
-	/**
-	 * @param companyCEO the companyCEO to set
-	 */
-	public void setCompanyCEO(String companyCEO) {
-		this.companyCEO = companyCEO;
-	}
-
-	/**
-	 * @return the companyTurnOver
-	 */
-	public BigInteger getCompanyTurnOver() {
-		return companyTurnOver;
-	}
-
-	/**
-	 * @param companyTurnOver the companyTurnOver to set
-	 */
-	public void setCompanyTurnOver(BigInteger companyTurnOver) {
-		this.companyTurnOver = companyTurnOver;
-	}
-
-	/**
-	 * @return the currencyCode
-	 */
-	public String getCurrencyCode() {
-		return currencyCode;
-	}
-
-	/**
-	 * @param currencyCode the currencyCode to set
-	 */
-	public void setCurrencyCode(String currencyCode) {
-		this.currencyCode = currencyCode;
-	}
-
-	/**
-	 * @return the companyUrl
-	 */
-	public String getCompanyUrl() {
-		return companyUrl;
-	}
-
-	/**
-	 * @param companyUrl the companyUrl to set
-	 */
-	public void setCompanyUrl(String companyUrl) {
-		this.companyUrl = companyUrl;
-	}
-
-	/**
-	 * @return the stockExchange
-	 */
-	public String getStockExchange() {
-		return stockExchange;
-	}
-
-	/**
-	 * @param stockExchange the stockExchange to set
-	 */
-	public void setStockExchange(String stockExchange) {
-		this.stockExchange = stockExchange;
-	}
-
 }

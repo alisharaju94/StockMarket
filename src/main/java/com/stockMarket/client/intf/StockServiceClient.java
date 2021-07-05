@@ -5,5 +5,5 @@ import com.stockMarket.model.StockDetailsResponse;
 
 public interface StockServiceClient {
 
-	StockDetailsResponse addStock(StockDetails stockDetails, String string);
+	StockDetailsResponse addStock(StockDetails stockDetails, long companyCode);
 }
