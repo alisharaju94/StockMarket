@@ -2,8 +2,14 @@ package com.stockMarket.client.intf;
 
 import com.stockMarket.model.StockDetails;
 import com.stockMarket.model.StockDetailsResponse;
+import com.stockMarket.model.StockRangeQueryParams;
+import com.stockMarket.model.StockResponseBean;
 
 public interface StockServiceClient {
 
-	StockDetailsResponse addStock(StockDetails stockDetails, long companyCode);
+	StockResponseBean addStock(StockDetails stockDetails, String companyCode);
+	
+	StockDetailsResponse getStockInRange(StockRangeQueryParams params);
+
+	void deleteStocks(long companyCode);
 }

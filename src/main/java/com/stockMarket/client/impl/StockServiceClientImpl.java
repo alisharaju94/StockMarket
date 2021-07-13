@@ -11,6 +11,8 @@ import org.springframework.web.util.UriTemplate;
 import com.stockMarket.client.intf.StockServiceClient;
 import com.stockMarket.model.StockDetails;
 import com.stockMarket.model.StockDetailsResponse;
+import com.stockMarket.model.StockRangeQueryParams;
+import com.stockMarket.model.StockResponseBean;
 
 @Component
 public class StockServiceClientImpl implements StockServiceClient {
@@ -18,16 +20,41 @@ public class StockServiceClientImpl implements StockServiceClient {
 	@Value("${stockService.addStockUrl}")
 	private String addStockUrl;
 
+	@Value("${stockService.getStockUrl}")
+	private String getStockUrl;
+
+	@Value("${stockService.deleteUrl}")
+	private String deleteUrl;
+	
 	@Autowired
 	private RestTemplate restTemplate;
 
 	@Override
-	public StockDetailsResponse addStock(StockDetails stockDetails, long companyCode) {
+	public StockResponseBean addStock(StockDetails stockDetails, String companyCode) {
 		UriTemplate uriTemplate = new UriTemplate(addStockUrl);
 		URI uri = uriTemplate.expand(companyCode);
-		StockDetailsResponse stockDetailsResponse = restTemplate
-				.postForEntity(uri, stockDetails, StockDetailsResponse.class).getBody();
+		StockResponseBean stockDetailsResponse = restTemplate
+				.postForEntity(uri, stockDetails, StockResponseBean.class).getBody();
+		if (stockDetailsResponse == null) {
+			// throw Exception
+		}
 		return stockDetailsResponse;
 	}
 
+	@Override
+	public StockDetailsResponse getStockInRange(StockRangeQueryParams params) {
+		StockDetailsResponse stockDetailsResponse = restTemplate
+				.postForEntity(getStockUrl, params, StockDetailsResponse.class).getBody();
+		if (stockDetailsResponse == null) {
+			// throw Exception
+		}
+		return stockDetailsResponse;
+	}
+
+	@Override
+	public void deleteStocks(long companyCode) {
+		UriTemplate uriTemplate = new UriTemplate(deleteUrl);
+		URI uri = uriTemplate.expand(companyCode);
+		restTemplate.delete(uri);
+	}
 }

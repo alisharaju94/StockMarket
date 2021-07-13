@@ -4,9 +4,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.ObjectUtils;
-
-import com.stockMarket.model.Stock;
 
 public class CurrCodeValidator implements ConstraintValidator<CurrCodeValidity, String> {
 

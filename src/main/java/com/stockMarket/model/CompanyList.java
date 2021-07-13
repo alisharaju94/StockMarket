@@ -5,7 +5,6 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class StockDetailsResponse {
-
-	private List<StockResponseBean> stockDetails;
+public class CompanyList {
+	private List<CompanyResponseBean> companies;
 }

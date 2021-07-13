@@ -3,13 +3,17 @@
  */
 package com.stockMarket.client.impl;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriTemplate;
 
 import com.stockMarket.client.intf.CompanyServiceClient;
 import com.stockMarket.model.Company;
+import com.stockMarket.model.CompanyList;
 import com.stockMarket.model.CompanyResponseBean;
 
 /**
@@ -20,8 +24,14 @@ import com.stockMarket.model.CompanyResponseBean;
 @Component
 public class CompanyServiceClientImpl implements CompanyServiceClient {
 
-	@Value("${companyService.addCompanyUrl}")
+	@Value("${companyService.add}")
 	private String addCompanyUrl;
+
+	@Value("${companyService.getAll}")
+	private String getAllUrl;
+
+	@Value("${companyService.delete}")
+	private String deleteUrl;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -31,9 +41,25 @@ public class CompanyServiceClientImpl implements CompanyServiceClient {
 
 		CompanyResponseBean responseBean = restTemplate.postForEntity(addCompanyUrl, company, CompanyResponseBean.class)
 				.getBody();
-		if(responseBean == null) {
+		if (responseBean == null) {
 			throw new Exception();
 		}
 		return responseBean;
+	}
+
+	@Override
+	public CompanyList getAll() throws Exception {
+		CompanyList res = restTemplate.getForEntity(getAllUrl, CompanyList.class).getBody();
+		if (res == null) {
+			throw new Exception();
+		}
+		return res;
+	}
+
+	@Override
+	public void deleteCompany(long companyCode) {
+		UriTemplate uriTemplate = new UriTemplate(deleteUrl);
+		URI uri = uriTemplate.expand(companyCode);
+		restTemplate.delete(uri);
 	}
 }

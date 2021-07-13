@@ -8,7 +8,11 @@ server:
     lazy-initialization: false
 
 companyService:
- addCompanyUrl: http://localhost:8082/company/add
+ add: http://localhost:8082/company/add
+ getAll: http://localhost:8082/company/getAll
+ delete: http://localhost:8082/company/{companyCode}
  
 stockService:
  addStockUrl: http://localhost:8083/stock/add/{companyCode}
+ getStockUrl: http://localhost:8083/stock/
+ deleteUrl: http://localhost:8083/stock/{companyCode}
