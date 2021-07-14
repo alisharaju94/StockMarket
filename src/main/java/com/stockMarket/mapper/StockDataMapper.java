@@ -16,11 +16,14 @@ import com.stockMarket.model.StockResponseBean;
 @Component
 public class StockDataMapper {
 
-	public StockRangeDetails groupByStockCode(StockDetailsResponse stockRes) {
-		StockRangeDetails rangeRes = new StockRangeDetails();
-		Collections.sort(stockRes.getStockDetails(), Comparator.comparing(StockResponseBean::getPrice));
-		populateStockRangeDetails(rangeRes, stockRes.getStockDetails());
-		return rangeRes;
+	public StockRangeDetails mapStockRangeQueryRes(StockDetailsResponse stockRes) {
+		if (stockRes != null) {
+			StockRangeDetails rangeRes = new StockRangeDetails();
+			Collections.sort(stockRes.getStockDetails(), Comparator.comparing(StockResponseBean::getPrice));
+			populateStockRangeDetails(rangeRes, stockRes.getStockDetails());
+			return rangeRes;
+		}
+		return null;
 	}
 
 	private void populateStockRangeDetails(StockRangeDetails rangeRes, List<StockResponseBean> valueList) {

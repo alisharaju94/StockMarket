@@ -66,13 +66,13 @@ public class StockMarketServiceImpl implements StockMarketService {
 	}
 
 	@Override
-	public StockRangeDetails getStockInRange(long comCode, String strtDate, String endDate) {
+	public StockRangeDetails getStockInRange(String comCode, String strtDate, String endDate) {
 		StockRangeQueryParams params = new StockRangeQueryParams();
 		params.setCompanyCode(comCode);
 		params.setStart(getTimeStamp(strtDate));
 		params.setEnd(getTimeStamp(endDate));
 		StockDetailsResponse stockRes = stockServiceClient.getStockInRange(params);
-		return stockDataMapper.groupByStockCode(stockRes);
+		return stockDataMapper.mapStockRangeQueryRes(stockRes);
 	}
 
 	private Timestamp getTimeStamp(String date) {
@@ -80,6 +80,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 			Date parsedDate = dateFormat.parse(date);
+			System.out.println(DateUtils.truncate(timeStamp, Calendar.YEAR));
 			if (DateUtils.isSameDay(parsedDate, CommonConstants.today())) {
 				timeStamp = Timestamp.from(Instant.now());
 				parsedDate = DateUtils.truncate(timeStamp, Calendar.MINUTE);

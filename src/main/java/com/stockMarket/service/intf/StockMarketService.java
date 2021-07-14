@@ -18,7 +18,7 @@ public interface StockMarketService {
 
 	CompanyList getAll() throws Exception;
 	
-	StockRangeDetails getStockInRange(long comCode, String strtDate, String endDate);
+	StockRangeDetails getStockInRange(String comCode, String strtDate, String endDate);
 
 	void deleteCompany(long companyCode);
 }
