@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,21 +71,22 @@ public class StockMarketServiceImpl implements StockMarketService {
 	public StockRangeDetails getStockInRange(String comCode, String strtDate, String endDate) {
 		StockRangeQueryParams params = new StockRangeQueryParams();
 		params.setCompanyCode(comCode);
-		params.setStart(getTimeStamp(strtDate));
-		params.setEnd(getTimeStamp(endDate));
+		params.setStart(getTimeStamp(strtDate, CommonConstants.START));
+		params.setEnd(getTimeStamp(endDate, CommonConstants.END));
 		StockDetailsResponse stockRes = stockServiceClient.getStockInRange(params);
 		return stockDataMapper.mapStockRangeQueryRes(stockRes);
 	}
 
-	private Timestamp getTimeStamp(String date) {
+	private Timestamp getTimeStamp(String date, String identifier) {
 		Timestamp timeStamp = null;
+		Date parsedDate = null;
 		try {
 			SimpleDateFormat dateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
-			Date parsedDate = dateFormat.parse(date);
-			System.out.println(DateUtils.truncate(timeStamp, Calendar.YEAR));
+			parsedDate = dateFormat.parse(date);
 			if (DateUtils.isSameDay(parsedDate, CommonConstants.today())) {
 				timeStamp = Timestamp.from(Instant.now());
-				parsedDate = DateUtils.truncate(timeStamp, Calendar.MINUTE);
+				int field = StringUtils.equals(CommonConstants.START, identifier) ? Calendar.DATE : Calendar.MINUTE;
+				parsedDate = DateUtils.truncate(timeStamp, field);
 			}
 			timeStamp = new Timestamp(parsedDate.getTime());
 

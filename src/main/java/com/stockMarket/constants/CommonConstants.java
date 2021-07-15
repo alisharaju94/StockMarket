@@ -11,6 +11,8 @@ public class CommonConstants {
 	public static final int INT_ONE = 1;
 	public static final int TEN_CR = 100000000;
 	public static final String DATE_FORMAT = "yyyy-MM-dd";
+	public static final String START = "start";
+	public static final String END = "end";
 	
 	public static Date today() {
 		return new Date();

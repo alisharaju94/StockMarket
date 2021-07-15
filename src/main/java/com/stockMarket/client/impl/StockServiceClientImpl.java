@@ -45,9 +45,6 @@ public class StockServiceClientImpl implements StockServiceClient {
 	public StockDetailsResponse getStockInRange(StockRangeQueryParams params) {
 		StockDetailsResponse stockDetailsResponse = restTemplate
 				.postForEntity(getStockUrl, params, StockDetailsResponse.class).getBody();
-		if (stockDetailsResponse == null) {
-			// throw Exception
-		}
 		return stockDetailsResponse;
 	}
 
