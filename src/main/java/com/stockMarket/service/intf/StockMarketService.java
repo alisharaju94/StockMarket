@@ -20,5 +20,5 @@ public interface StockMarketService {
 	
 	StockRangeDetails getStockInRange(String comCode, String strtDate, String endDate);
 
-	void deleteCompany(long companyCode);
+	void deleteCompany(String companyCode);
 }

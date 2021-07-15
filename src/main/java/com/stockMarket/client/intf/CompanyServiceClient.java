@@ -10,5 +10,5 @@ public interface CompanyServiceClient {
 
 	CompanyList getAll() throws Exception;
 
-	void deleteCompany(long companyCode);
+	void deleteCompany(String companyCode);
 }

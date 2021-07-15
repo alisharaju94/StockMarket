@@ -11,5 +11,5 @@ public interface StockServiceClient {
 	
 	StockDetailsResponse getStockInRange(StockRangeQueryParams params);
 
-	void deleteStocks(long companyCode);
+	void deleteStocks(String companyCode);
 }

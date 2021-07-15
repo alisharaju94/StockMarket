@@ -44,7 +44,7 @@ public class MarketCompanyController {
 	}
 	
 	@DeleteMapping(value = "/{companyCode}")
-	public ResponseEntity deleteCompany(@PathVariable long companyCode) throws Exception {
+	public ResponseEntity deleteCompany(@PathVariable String companyCode) throws Exception {
 		marketService.deleteCompany(companyCode);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

@@ -77,30 +77,39 @@ public class StockMarketServiceImpl implements StockMarketService {
 		return stockDataMapper.mapStockRangeQueryRes(stockRes);
 	}
 
-	private Timestamp getTimeStamp(String date, String identifier) {
-		Timestamp timeStamp = null;
-		Date parsedDate = null;
-		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
-			parsedDate = dateFormat.parse(date);
-			if (DateUtils.isSameDay(parsedDate, CommonConstants.today())) {
-				timeStamp = Timestamp.from(Instant.now());
-				int field = StringUtils.equals(CommonConstants.START, identifier) ? Calendar.DATE : Calendar.MINUTE;
-				parsedDate = DateUtils.truncate(timeStamp, field);
-			}
-			timeStamp = new Timestamp(parsedDate.getTime());
-
-		} catch (Exception e) {
-			// look the origin of excption
-		}
-
-		return timeStamp;
-	}
-
 	@Override
-	public void deleteCompany(long companyCode) {
+	public void deleteCompany(String companyCode) {
 		companyServiceClient.deleteCompany(companyCode);
 		stockServiceClient.deleteStocks(companyCode);
+	}
+
+	private Timestamp getTimeStamp(String date, String identifier) {
+		if (!StringUtils.isEmpty(date)) {
+			Date parsedDate = null;
+			try {
+				parsedDate = DateUtils.parseDate(date, CommonConstants.DATE_FORMAT);
+				if (StringUtils.equals(CommonConstants.END, identifier)) {
+					parsedDate = processEndDate(parsedDate);
+				}
+				return new Timestamp(parsedDate.getTime());
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	private Date processEndDate(Date parsedDate) {
+		if (DateUtils.isSameDay(parsedDate, CommonConstants.today())) {
+			Timestamp timeStamp = Timestamp.from(Instant.now());
+			parsedDate = DateUtils.truncate(timeStamp, Calendar.MINUTE);
+			return parsedDate;
+		}
+		parsedDate = DateUtils.addHours(parsedDate, 23);
+		parsedDate = DateUtils.addMinutes(parsedDate, 59);
+		parsedDate = DateUtils.addSeconds(parsedDate, 59);
+		return parsedDate;
 	}
 
 }

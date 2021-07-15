@@ -57,7 +57,7 @@ public class CompanyServiceClientImpl implements CompanyServiceClient {
 	}
 
 	@Override
-	public void deleteCompany(long companyCode) {
+	public void deleteCompany(String companyCode) {
 		UriTemplate uriTemplate = new UriTemplate(deleteUrl);
 		URI uri = uriTemplate.expand(companyCode);
 		restTemplate.delete(uri);

@@ -49,7 +49,7 @@ public class StockServiceClientImpl implements StockServiceClient {
 	}
 
 	@Override
-	public void deleteStocks(long companyCode) {
+	public void deleteStocks(String companyCode) {
 		UriTemplate uriTemplate = new UriTemplate(deleteUrl);
 		URI uri = uriTemplate.expand(companyCode);
 		restTemplate.delete(uri);
