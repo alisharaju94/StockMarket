@@ -2,6 +2,8 @@ package com.stockMarket.controller;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/market/company")
 public class MarketCompanyController {
+	public static final Logger LOG = LogManager.getLogger(MarketCompanyController.class);
 
 	@Autowired
 	StockMarketService marketService;
@@ -35,16 +38,19 @@ public class MarketCompanyController {
 	public MarketResponse registerCompany(
 			@ApiParam(value = "stockMarketRequest", required = true) @RequestBody @Valid StockMarketRequest stockMarketRequest)
 			throws Exception {
+		LOG.info("Register company request intiated {}", stockMarketRequest);
 		return marketService.addCompany(stockMarketRequest);
 	}
 
 	@GetMapping(value = "/getAll")
+	@ApiOperation(value = "Get details of all companies", response = CompanyList.class)
 	public CompanyList getAllCompany() throws Exception {
 		return marketService.getAll();
 	}
 	
 	@DeleteMapping(value = "/{companyCode}")
-	public ResponseEntity deleteCompany(@PathVariable String companyCode) throws Exception {
+	@ApiOperation(value = "Delete a company")
+	public ResponseEntity deleteCompany(@ApiParam(value = "companyCode", required = true) @PathVariable String companyCode) throws Exception {
 		marketService.deleteCompany(companyCode);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

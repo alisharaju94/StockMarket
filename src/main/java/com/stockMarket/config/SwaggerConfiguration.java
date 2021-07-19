@@ -5,6 +5,7 @@ import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -23,7 +24,7 @@ public class SwaggerConfiguration {
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors.basePackage("com.stockMarket.controller"))
 				.paths(PathSelectors.regex("/api/v1.0/market.*")).build().apiInfo(apiInfo())
-				.ignoredParameterTypes(Timestamp.class);
+				.ignoredParameterTypes(Timestamp.class, ResponseEntity.class);
 	}
 
 	private ApiInfo apiInfo() {

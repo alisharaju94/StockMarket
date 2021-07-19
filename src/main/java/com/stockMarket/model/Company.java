@@ -20,7 +20,7 @@ public class Company implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(notes = "The company unique code. Required only for data manipulation ops", example = "1", allowEmptyValue = true)
+	@ApiModelProperty(notes = "The company unique code. Required only for data manipulation ops", example = "C_000000", allowEmptyValue = true)
 	private String companyCode;
 
 	@NotEmpty(message = ValidationMessages.COMPANY_NAME)

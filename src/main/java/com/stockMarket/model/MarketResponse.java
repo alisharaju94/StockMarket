@@ -5,6 +5,7 @@ package com.stockMarket.model;
 
 import java.io.Serializable;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  *
  */
 @Data
+@ApiResponse
 public class MarketResponse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
