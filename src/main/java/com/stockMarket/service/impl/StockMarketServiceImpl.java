@@ -83,7 +83,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 		stockServiceClient.deleteStocks(companyCode);
 	}
 
-	private Timestamp getTimeStamp(String date, String identifier) {
+	private long getTimeStamp(String date, String identifier) {
 		if (!StringUtils.isEmpty(date)) {
 			Date parsedDate = null;
 			try {
@@ -91,13 +91,13 @@ public class StockMarketServiceImpl implements StockMarketService {
 				if (StringUtils.equals(CommonConstants.END, identifier)) {
 					parsedDate = processEndDate(parsedDate);
 				}
-				return new Timestamp(parsedDate.getTime());
+				return parsedDate.getTime();
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return 0;
 	}
 
 	private Date processEndDate(Date parsedDate) {
