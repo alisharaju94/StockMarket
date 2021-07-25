@@ -23,11 +23,11 @@ management:
     include: "health, info, beans, prometheus"
 
 companyService:
- add: http://ec2-13-234-48-222.ap-south-1.compute.amazonaws.com:8082/company/add
- getAll: http://ec2-13-234-48-222.ap-south-1.compute.amazonaws.com:8082/company/getAll
- delete: http://ec2-13-234-48-222.ap-south-1.compute.amazonaws.com:8082/company/{companyCode}
+ add: http://ec2-13-232-203-111.ap-south-1.compute.amazonaws.com:8082/company/add
+ getAll: http://ec2-13-232-203-111.ap-south-1.compute.amazonaws.com:8082/company/getAll
+ delete: http://ec2-13-232-203-111.ap-south-1.compute.amazonaws.com:8082/company/{companyCode}
  
 stockService:
- addStockUrl: http://ec2-13-234-37-107.ap-south-1.compute.amazonaws.com:8083/stock/add/{companyCode}
- getStockUrl: http://ec2-13-234-37-107.ap-south-1.compute.amazonaws.com:8083/stock/
- deleteUrl: http://ec2-13-234-37-107.ap-south-1.compute.amazonaws.com:8083/stock/{companyCode}
+ addStockUrl: http://ec2-3-108-215-49.ap-south-1.compute.amazonaws.com:8083/stock/add/{companyCode}
+ getStockUrl: http://ec2-3-108-215-49.ap-south-1.compute.amazonaws.com:8083/stock/
+ deleteUrl: http://ec2-3-108-215-49.ap-south-1.compute.amazonaws.com:8083/stock/{companyCode}
