@@ -15,6 +15,10 @@
 	<name>stockmarket</name>
 	<description>StockMarket application</description>
 	<properties>
+		<sonar.projectKey>alisharaju94_StockMarket</sonar.projectKey>
+		<sonar.organization>e-stockmarket</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -59,7 +63,6 @@
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
-			<version>1.7.1</version>
 		</dependency>
 
 		<dependency>
