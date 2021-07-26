@@ -9,7 +9,11 @@ import com.stockMarket.constants.ValidationMessages;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.ToString;
 
+@Data
+@ToString
 @ApiModel(description = "Details about company and stocks")
 public class StockMarketRequest implements Serializable{
 
@@ -24,33 +28,4 @@ public class StockMarketRequest implements Serializable{
 	@NotNull(message = ValidationMessages.STOCK_DETAILS)
 	@ApiModelProperty
 	private StockDetails stockDetails;
-
-	/**
-	 * @return the companyDetails
-	 */
-	public Company getCompanyDetails() {
-		return companyDetails;
-	}
-
-	/**
-	 * @param companyDetails the companyDetails to set
-	 */
-	public void setCompanyDetails(Company companyDetails) {
-		this.companyDetails = companyDetails;
-	}
-
-	/**
-	 * @return the stockDetails
-	 */
-	public StockDetails getStockDetails() {
-		return stockDetails;
-	}
-
-	/**
-	 * @param stockDetails the stockDetails to set
-	 */
-	public void setStockDetails(StockDetails stockDetails) {
-		this.stockDetails = stockDetails;
-	}
-
 }

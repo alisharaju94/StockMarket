@@ -44,6 +44,7 @@ public class MarketCompanyController {
 	@GetMapping(value = "/getAll")
 	@ApiOperation(value = "Get details of all companies", response = CompanyList.class)
 	public CompanyList getAllCompany() throws Exception {
+		LOGGER.info("Get all company details API invoked");
 		return marketService.getAll();
 	}
 
@@ -51,6 +52,7 @@ public class MarketCompanyController {
 	@ApiOperation(value = "Get details of all companies", response = CompanyList.class)
 	public CompanyInfoBean getAllCompany(@ApiParam(value = "companyCode", required = true) @PathVariable String companyCode)
 			throws Exception {
+		LOGGER.info("Get company details for companyID = {} invoked", companyCode);
 		return marketService.getCompanyInfo(companyCode);
 	}
 
@@ -58,6 +60,7 @@ public class MarketCompanyController {
 	@ApiOperation(value = "Delete a company")
 	public ResponseEntity deleteCompany(
 			@ApiParam(value = "companyCode", required = true) @PathVariable String companyCode) throws Exception {
+		LOGGER.info("Delete company with companyID = {} invoked", companyCode);
 		marketService.deleteCompany(companyCode);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
