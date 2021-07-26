@@ -24,6 +24,7 @@ management:
 
 companyService:
  add: http://localhost:8082/company/add
+ info: http://localhost:8082/company/info/{companyCode}
  getAll: http://localhost:8082/company/getAll
  delete: http://localhost:8082/company/{companyCode}
  

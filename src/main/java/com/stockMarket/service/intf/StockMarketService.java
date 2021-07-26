@@ -3,6 +3,7 @@
  */
 package com.stockMarket.service.intf;
 
+import com.stockMarket.model.CompanyInfoBean;
 import com.stockMarket.model.CompanyList;
 import com.stockMarket.model.MarketResponse;
 import com.stockMarket.model.StockMarketRequest;
@@ -21,4 +22,6 @@ public interface StockMarketService {
 	StockRangeDetails getStockInRange(String comCode, String strtDate, String endDate);
 
 	void deleteCompany(String companyCode);
+
+	CompanyInfoBean getCompanyInfo(String companyCode) throws Exception;
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stockMarket.model.CompanyInfoBean;
 import com.stockMarket.model.CompanyList;
 import com.stockMarket.model.MarketResponse;
 import com.stockMarket.model.StockMarketRequest;
@@ -28,7 +29,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/market/company")
 public class MarketCompanyController {
-	public static final Logger LOG = LogManager.getLogger(MarketCompanyController.class);
+	public static final Logger LOGGER = LogManager.getLogger(MarketCompanyController.class);
 
 	@Autowired
 	StockMarketService marketService;
@@ -38,7 +39,7 @@ public class MarketCompanyController {
 	public MarketResponse registerCompany(
 			@ApiParam(value = "stockMarketRequest", required = true) @RequestBody @Valid StockMarketRequest stockMarketRequest)
 			throws Exception {
-		LOG.info("Register company request intiated {}", stockMarketRequest);
+		LOGGER.info("Register company request intiated {}", stockMarketRequest);
 		return marketService.addCompany(stockMarketRequest);
 	}
 
@@ -47,10 +48,18 @@ public class MarketCompanyController {
 	public CompanyList getAllCompany() throws Exception {
 		return marketService.getAll();
 	}
-	
+
+	@GetMapping(value = "/info/{companyCode}")
+	@ApiOperation(value = "Get details of all companies", response = CompanyList.class)
+	public CompanyInfoBean getAllCompany(@ApiParam(value = "companyCode", required = true) @PathVariable String companyCode)
+			throws Exception {
+		return marketService.getCompanyInfo(companyCode);
+	}
+
 	@DeleteMapping(value = "/{companyCode}")
 	@ApiOperation(value = "Delete a company")
-	public ResponseEntity deleteCompany(@ApiParam(value = "companyCode", required = true) @PathVariable String companyCode) throws Exception {
+	public ResponseEntity deleteCompany(
+			@ApiParam(value = "companyCode", required = true) @PathVariable String companyCode) throws Exception {
 		marketService.deleteCompany(companyCode);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

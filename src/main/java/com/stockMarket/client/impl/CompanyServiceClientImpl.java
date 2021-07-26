@@ -13,6 +13,7 @@ import org.springframework.web.util.UriTemplate;
 
 import com.stockMarket.client.intf.CompanyServiceClient;
 import com.stockMarket.model.Company;
+import com.stockMarket.model.CompanyInfoBean;
 import com.stockMarket.model.CompanyList;
 import com.stockMarket.model.CompanyResponseBean;
 
@@ -29,6 +30,9 @@ public class CompanyServiceClientImpl implements CompanyServiceClient {
 
 	@Value("${companyService.getAll}")
 	private String getAllUrl;
+	
+	@Value("${companyService.info}")
+	private String infoUrl;
 
 	@Value("${companyService.delete}")
 	private String deleteUrl;
@@ -61,5 +65,14 @@ public class CompanyServiceClientImpl implements CompanyServiceClient {
 		UriTemplate uriTemplate = new UriTemplate(deleteUrl);
 		URI uri = uriTemplate.expand(companyCode);
 		restTemplate.delete(uri);
+	}
+
+	@Override
+	public CompanyInfoBean getCompanyInfo(String companyCode) throws Exception {
+		CompanyInfoBean res = restTemplate.getForEntity(infoUrl, CompanyInfoBean.class).getBody();
+		if (res == null) {
+			throw new Exception();
+		}
+		 return res;
 	}
 }

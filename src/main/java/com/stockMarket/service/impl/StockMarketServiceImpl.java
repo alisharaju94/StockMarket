@@ -18,6 +18,7 @@ import com.stockMarket.client.intf.CompanyServiceClient;
 import com.stockMarket.client.intf.StockServiceClient;
 import com.stockMarket.constants.CommonConstants;
 import com.stockMarket.mapper.StockDataMapper;
+import com.stockMarket.model.CompanyInfoBean;
 import com.stockMarket.model.CompanyList;
 import com.stockMarket.model.CompanyResponseBean;
 import com.stockMarket.model.MarketResponse;
@@ -110,6 +111,12 @@ public class StockMarketServiceImpl implements StockMarketService {
 		parsedDate = DateUtils.addMinutes(parsedDate, 59);
 		parsedDate = DateUtils.addSeconds(parsedDate, 59);
 		return parsedDate;
+	}
+
+	@Override
+	public CompanyInfoBean getCompanyInfo(String companyCode) throws Exception {
+		companyServiceClient.getCompanyInfo(companyCode);
+		return null;
 	}
 
 }
