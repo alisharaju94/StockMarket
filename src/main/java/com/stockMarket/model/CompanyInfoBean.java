@@ -1,7 +1,6 @@
 package com.stockMarket.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import lombok.Data;
@@ -14,8 +13,8 @@ public class CompanyInfoBean implements Serializable {
 	private String name;
 	private String ceo;
 	private BigInteger turnOver;
-	private BigDecimal latestStockPrice;
 	private String currencyCode;
 	private String url;
 	private String stockExchange;
+	private PriceTime latestPrice;
 }

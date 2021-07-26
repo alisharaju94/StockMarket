@@ -32,3 +32,4 @@ stockService:
  addStockUrl: http://localhost:8083/stock/add/{companyCode}
  getStockUrl: http://localhost:8083/stock/
  deleteUrl: http://localhost:8083/stock/{companyCode}
+ getLatestPrice: http://localhost:8083/stock/latest/{companyCode}

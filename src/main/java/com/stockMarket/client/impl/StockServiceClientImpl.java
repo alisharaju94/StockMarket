@@ -25,7 +25,10 @@ public class StockServiceClientImpl implements StockServiceClient {
 
 	@Value("${stockService.deleteUrl}")
 	private String deleteUrl;
-	
+
+	@Value("${stockService.getLatestPrice}")
+	private String getLatestPriceUrl;
+
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -33,8 +36,8 @@ public class StockServiceClientImpl implements StockServiceClient {
 	public StockResponseBean addStock(StockDetails stockDetails, String companyCode) {
 		UriTemplate uriTemplate = new UriTemplate(addStockUrl);
 		URI uri = uriTemplate.expand(companyCode);
-		StockResponseBean stockDetailsResponse = restTemplate
-				.postForEntity(uri, stockDetails, StockResponseBean.class).getBody();
+		StockResponseBean stockDetailsResponse = restTemplate.postForEntity(uri, stockDetails, StockResponseBean.class)
+				.getBody();
 		if (stockDetailsResponse == null) {
 			// throw Exception
 		}
@@ -43,9 +46,7 @@ public class StockServiceClientImpl implements StockServiceClient {
 
 	@Override
 	public StockDetailsResponse getStockInRange(StockRangeQueryParams params) {
-		StockDetailsResponse stockDetailsResponse = restTemplate
-				.postForEntity(getStockUrl, params, StockDetailsResponse.class).getBody();
-		return stockDetailsResponse;
+		return restTemplate.postForEntity(getStockUrl, params, StockDetailsResponse.class).getBody();
 	}
 
 	@Override
@@ -53,5 +54,12 @@ public class StockServiceClientImpl implements StockServiceClient {
 		UriTemplate uriTemplate = new UriTemplate(deleteUrl);
 		URI uri = uriTemplate.expand(companyCode);
 		restTemplate.delete(uri);
+	}
+
+	@Override
+	public StockResponseBean getLatestStockPriceForComCode(String companyCode) {
+		UriTemplate uriTemplate = new UriTemplate(getLatestPriceUrl);
+		URI uri = uriTemplate.expand(companyCode);
+		return restTemplate.getForEntity(uri, StockResponseBean.class).getBody();
 	}
 }

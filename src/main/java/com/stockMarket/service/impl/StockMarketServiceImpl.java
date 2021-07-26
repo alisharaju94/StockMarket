@@ -4,13 +4,13 @@
 package com.stockMarket.service.impl;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +22,7 @@ import com.stockMarket.model.CompanyInfoBean;
 import com.stockMarket.model.CompanyList;
 import com.stockMarket.model.CompanyResponseBean;
 import com.stockMarket.model.MarketResponse;
+import com.stockMarket.model.PriceTime;
 import com.stockMarket.model.StockDetailsResponse;
 import com.stockMarket.model.StockMarketRequest;
 import com.stockMarket.model.StockRangeDetails;
@@ -115,8 +116,15 @@ public class StockMarketServiceImpl implements StockMarketService {
 
 	@Override
 	public CompanyInfoBean getCompanyInfo(String companyCode) throws Exception {
-		companyServiceClient.getCompanyInfo(companyCode);
-		return null;
+		CompanyInfoBean companyInfoBean = new CompanyInfoBean();
+		CompanyResponseBean companyResponseBean = companyServiceClient.getCompanyInfo(companyCode);
+		BeanUtils.copyProperties(companyResponseBean, companyInfoBean);
+
+		StockResponseBean stockResponseBean = stockServiceClient.getLatestStockPriceForComCode(companyCode);
+		PriceTime priceTime = new PriceTime();
+		BeanUtils.copyProperties(stockResponseBean, priceTime);
+		companyInfoBean.setLatestPrice(priceTime);
+		return companyInfoBean;
 	}
 
 }

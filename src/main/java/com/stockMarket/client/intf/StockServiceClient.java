@@ -12,4 +12,6 @@ public interface StockServiceClient {
 	StockDetailsResponse getStockInRange(StockRangeQueryParams params);
 
 	void deleteStocks(String companyCode);
+
+	StockResponseBean getLatestStockPriceForComCode(String companyCode);
 }

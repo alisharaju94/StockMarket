@@ -9,10 +9,7 @@ public class CurrCodeValidator implements ConstraintValidator<CurrCodeValidity, 
 
 	@Override
 	public boolean isValid(String code, ConstraintValidatorContext context) {
-		if (StringUtils.isEmpty(code) || code.length() != 3) {
-			return false;
-		}
-		return true;
+		return !(StringUtils.isEmpty(code) || code.length() != 3);
 	}
 
 }
